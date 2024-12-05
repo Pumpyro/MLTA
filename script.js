@@ -13,19 +13,35 @@ class Validator {
   }
 
   P() {
-    if (this.match('*') && this.match('1')) return "*1";
-    if (this.match('/') && this.match('1')) return "/1";
-    return "";
+    // if (this.match('*') && this.match('1')) {
+    //   const p = this.P(); 
+    //   return `*1${p}`;
+    // }
+    // if (this.match('/') && this.match('1')) {
+    //   const p = this.P(); 
+    //   return `/1${p}`;
+    // }
+    // return "";
+    if (this.match('*') && this.match('1')) {
+      return `*1${this.P()}`; // Рекурсивно продолжаем P
+    }
+    if (this.match('/') && this.match('1')) {
+      return `/1${this.P()}`; // Рекурсивно продолжаем P
+    }
+    return ""; // e
   }
+  
 
   A() {
     if (this.match('-') && this.match('1')) {
       const p1 = this.P();
       const a1 = this.A();
       if (this.match('+') && this.match('1')) {
+        const p2 = this.P();
         const a2 = this.A();
-        return `-1${p1}${a1}+1${a2}`;
+        return `-1${p1}${a1}+1${p2}${a2}`;
       }
+        return "";
     }
     return "";
   }
@@ -35,9 +51,11 @@ class Validator {
       const p1 = this.P();
       const b1 = this.B();
       if (this.match('-') && this.match('1')) {
+        const p2 = this.P();
         const b2 = this.B();
-        return `+1${p1}${b1}-1${b2}`;
+        return `+1${p1}${b1}-1${p2}${b2}`;
       }
+      return "";
     }
     return "";
   }
@@ -47,15 +65,17 @@ class Validator {
       const p1 = this.P();
       const a1 = this.A();
       if (this.match('+') && this.match('1')) {
+        const p2 = this.P();
         const k1 = this.K();
-        return `-1${p1}${a1}+1${k1}`;
+        return `-1${p1}${a1}+1${p2}${k1}`;
       }
     } else if (this.match('+') && this.match('1')) {
       const p1 = this.P();
       const b1 = this.B();
       if (this.match('-') && this.match('1')) {
+        const p2 = this.P();
         const k1 = this.K();
-        return `+1${p1}${b1}-1${k1}`;
+        return `+1${p1}${b1}-1${p2}${k1}`;
       }
     }
     return "";
