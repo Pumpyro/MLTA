@@ -1,4 +1,5 @@
 class Validator {
+  
   constructor(word) {
     this.inputWord = word;
     this.index = 0;
@@ -13,22 +14,13 @@ class Validator {
   }
 
   P() {
-    // if (this.match('*') && this.match('1')) {
-    //   const p = this.P(); 
-    //   return `*1${p}`;
-    // }
-    // if (this.match('/') && this.match('1')) {
-    //   const p = this.P(); 
-    //   return `/1${p}`;
-    // }
-    // return "";
     if (this.match('*') && this.match('1')) {
-      return `*1${this.P()}`; // Рекурсивно продолжаем P
+      return `*1${this.P()}`;
     }
     if (this.match('/') && this.match('1')) {
-      return `/1${this.P()}`; // Рекурсивно продолжаем P
+      return `/1${this.P()}`;
     }
-    return ""; // e
+    return "";
   }
   
 
